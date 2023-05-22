@@ -1,9 +1,8 @@
 version: "3"
 services:
     app:
+        image: vrashuk/app:test
         build: 
             context: "."
-            dockerfile: Dockerfile
-        volumes:
-        - "./app:/app"
+            dockerfile: Dockerfile.production
         command: npm test
