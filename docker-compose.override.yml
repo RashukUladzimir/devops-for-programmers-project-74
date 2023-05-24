@@ -1,8 +1,25 @@
+version: "3"
 services:
     app:
+        build:
+            dockerfile: Dockerfile
         command: npm run dev
-        dockerfile: Dockerfile
-        ports:
-            - "8080:8080"
         volumes:
             - "./app:/app"
+    caddy:
+        image: caddy:2.6
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
+        volumes:
+            - "./services/caddy/Caddyfile:/etc/caddy/Caddyfile"
+            - "./public:/etc/caddy/public"
+            - caddy_data:/data
+            - caddy_config:/config
+        depends_on:
+            - app
+volumes:
+    caddy_data:
+    caddy_config:
