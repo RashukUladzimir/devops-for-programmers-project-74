@@ -1,11 +1,28 @@
 version: "3"
 services:
+    db:
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: ${DATABASE_NAME}
+            POSTGRES_USER: ${DATABASE_USERNAME}
+            POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+
     app:
         build:
             dockerfile: Dockerfile
-        command: npm run dev
+        command: bash -c "sleep 3 && npm start"
+        environment:
+            DATABASE_HOST: ${DATABASE_HOST}
+
         volumes:
             - "./app:/app"
+        depends_on:
+            - db
+
     caddy:
         image: caddy:2.6
         restart: unless-stopped
@@ -23,3 +40,4 @@ services:
 volumes:
     caddy_data:
     caddy_config:
+    pgdata:
