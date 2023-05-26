@@ -16,6 +16,10 @@ services:
             dockerfile: Dockerfile
         command: bash -c "sleep 3 && npm start"
         environment:
+            DATABASE_NAME: ${DATABASE_NAME}
+            DATABASE_USERNAME: ${DATABASE_USERNAME}
+            DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+
             DATABASE_HOST: ${DATABASE_HOST}
 
         volumes:
