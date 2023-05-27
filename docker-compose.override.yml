@@ -7,6 +7,8 @@ services:
         command: bash -c "sleep 3 && npm start"
         volumes:
             - "./app:/app"
+        ports:
+            - "5432:5432"
 
     caddy:
         image: caddy:2.6
