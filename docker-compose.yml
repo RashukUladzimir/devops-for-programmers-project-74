@@ -10,10 +10,9 @@ services:
             - pgdata:/var/lib/postgresql/data
         
     app:
-        image: vrashuk/app:test
+        image: vrashuk/app:latest
         build: 
-            context: "."
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.production
         command: bash -c "sleep 3 && npm start"
 
         environment:
