@@ -12,6 +12,7 @@ services:
     app:
         image: vrashuk/app:latest
         build: 
+            context: "."
             dockerfile: Dockerfile.production
         command: bash -c "sleep 3 && npm start"
 
